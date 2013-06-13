@@ -71,6 +71,14 @@ is replaced with replacement."
 ;(trace attributeValStr attributesStr contentStrVal contentStrAttr contentStr html)
 
 
+(set-macro-character #\[
+(lambda (stream char)
+ (let* ((lst
+        (read-delimited-list #\]
+     stream t)))
+  (eval (concatenate 'list '(html) lst)))))
+
+
 (defun testhtml ()
 (princ (html :html
 			(html :head
@@ -85,5 +93,12 @@ is replaced with replacement."
 				(html :title "testtitel"))
 			(html :body
 				(html :h1 '(:id "erster Absatz") "It works!"))))
+				
+(defun testhtml3 ()
+	[:html
+		[:head
+			[:title "testtitel" ]]
+		[:body
+			[:h1 '(:id "absatz" "abschnitt") "It works!" ]]])
 				
 (testhtml)
