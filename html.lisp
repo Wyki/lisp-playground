@@ -41,7 +41,7 @@
  (let* ((lst
         (read-delimited-list #\]
      stream t)))
-  (eval (concatenate 'list '(html) lst)))))
+  (list* 'html lst))))
 
 
 (defun testhtml ()
